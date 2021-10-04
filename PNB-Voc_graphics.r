@@ -84,6 +84,18 @@ summary(voc)
 voc$month2 <- factor(voc$month,
                        ordered = F)
 
+voc$rate <- round(voc$rate, digits = 2)
+barplot(voc$rate,
+        names.arg = voc$month2,
+        ylim = c(0,70))
+arrows(b[,1],
+       voc$rate,
+       b[,1],
+       voc$rate + voc$sd,
+       length = 0.05,
+       angle = 90,
+       code = 2)
+
 # png("G:/Mon Drive/Projet_Publis/PNB_COLONIE/Figures/PNB_daily_voc2.tiff",
 # res = 300,
 # width = 35,
@@ -116,12 +128,12 @@ b <- barplot(voc$rate,
              yaxt = 'n',
              xaxt = 'n')
 arrows(b[,1],
-       voc$rate - voc$sd,
+       voc$rate,
        b[,1],
        voc$rate + voc$sd,
        length = 0.05,
        angle = 90,
-       code = 3)
+       code = 2)
 axis(side = 1,
      at = b[,1],
      tick = F,
