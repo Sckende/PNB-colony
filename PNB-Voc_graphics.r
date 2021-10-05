@@ -14,7 +14,7 @@ summary(voc)
 voc$Minuts <- as.factor(voc$Minuts)
 voc$Minuts <- relevel(voc$Minuts, '60-120')
 
-# png("G:/Mon Drive/Projet_Publis/PNB_COLONIE/Figures/PNB_daily_voc2.tiff",
+# png("G:/Mon Drive/Projet_Publis/PNB_COLONIE/Figures/PNB_daily_voc3.tiff",
 # res = 300,
 # width = 35,
 # height = 25,
@@ -30,11 +30,12 @@ barplot(voc$mean,
         border = NA,
         col = rgb(1, 1, 1),
         xlab = 'Time after the sunset (min)',
-        xaxt = 'n',
+        # xaxt = 'n',
         ylab = 'Mean proportion of Masacarene Petrel vocalization (%)',
-        # cex.lab = 1.5,
-        cex.axis = 1.5)
-grid(NA, 6)
+        cex.names = 1.5,
+        cex.axis = 1.5,
+        cex.lab = 1.5)
+grid(NA, NULL)
 b <- barplot(voc$mean,
         names.arg = voc$Minuts,
         ylim = c(0, 30),
@@ -52,14 +53,14 @@ arrows(b[,1],
        length = 0.05,
        angle = 90,
        code = 3)
-axis(side = 1,
-     at = b[,1],
-     tick = F,
-     labels = as.character(voc$Minuts),
-     cex.lab = 1.8)
+# axis(side = 1,
+#      at = b[,1],
+#      tick = F,
+#      labels = as.character(voc$Minuts),
+#      cex.lab = 1.8)
 
 # dev.off()
-# 
+
 # library(ggplot2)
 # ggplot(voc,
 #        aes(x = Minuts, y = mean)) +
@@ -96,7 +97,7 @@ arrows(b[,1],
        angle = 90,
        code = 2)
 
-# png("G:/Mon Drive/Projet_Publis/PNB_COLONIE/Figures/PNB_daily_voc2.tiff",
+# png("G:/Mon Drive/Projet_Publis/PNB_COLONIE/Figures/PNB_monthly_voc1.tiff",
 # res = 300,
 # width = 35,
 # height = 25,
@@ -111,15 +112,20 @@ barplot(voc$rate,
         density = NULL,
         border = NA,
         col = rgb(1, 1, 1),
-        # xlab = 'Time after the sunset (min)',
-        xaxt = 'n',
-        # ylab = 'Mean proportion of Masacarene Petrel vocalization (%)',
-        # cex.lab = 1.5,
-        cex.axis = 1.5)
-grid(NA, 4)
+        xlab = 'Month',
+        yaxt = 'n',
+        ylab = 'Mean number of Mascarene Petrel Vocalizations',
+        cex.lab = 1.5,
+        cex.axis = 1.5,
+        cex.names = 1.5)
+# grid(NA, NULL)
+abline(h = seq(0, 180, 20),
+       col = 'lightgrey',
+       lty = 3)
+
 b <- barplot(voc$rate,
              names.arg = voc$month2,
-             # ylim = c(0, 30),
+             ylim = c(0, 30),
              angle = 45,
              density = NULL,
              border = NA,
@@ -127,6 +133,7 @@ b <- barplot(voc$rate,
              add = T,
              yaxt = 'n',
              xaxt = 'n')
+
 arrows(b[,1],
        voc$rate,
        b[,1],
@@ -134,10 +141,11 @@ arrows(b[,1],
        length = 0.05,
        angle = 90,
        code = 2)
-axis(side = 1,
-     at = b[,1],
-     tick = F,
-     labels = as.character(voc$month2),
-     cex.lab = 1.8)
+axis(side = 2,
+     at = seq(0, 180, 20),
+     tick = T,
+     cex.axis = 1.5,
+     las = 2)
+
 
 # dev.off()
