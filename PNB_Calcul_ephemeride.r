@@ -59,10 +59,47 @@ ephem2$sunrise_min <- hour(date_sunrise) * 60 + minute(date_sunrise)
 head(ephem2)
 tail(ephem2)
 
-# -----> delay btw sunrise and 5 AM = 300 min
-delay <- ephem2$sunrise_min - 300
-summary(delay)
-summary(ephem2$sunrise_min)
+head(ephem2$sunset)
+date_sunset <- as.POSIXct(paste(ephem2$date,
+                                ephem2$sunset,
+                                sep = " "),
+                          format = "%Y-%m-%d %H:%M")
+ephem2$sunset_min <- hour(date_sunset) * 60 + minute(date_sunset)
+
+
+# -----> Period : 01 july 2015 to 30 april 2016 ####
+####################################################
+
+summary(ephem2$date)
+jul2015_apr2016 <- ephem2[ephem2$date <= "2016-04-30",]
+summary(jul2015_apr2016$date)
+
+# -----> delay betw 1 AM (60 min) and the sunrise
+d_sunrise_1am <- jul2015_apr2016$sunrise_min - 60
+summary(d_sunrise_1am)
+
+# -----> delay betw 5 AM (300 min) and the sunrise
+d_sunrise_5am <- jul2015_apr2016$sunrise_min - 300
+summary(d_sunrise_5am)
+
+# -----> delay btw 8 PM (1200 min) and the sunset
+d_sunset_8pm <- 1200 - jul2015_apr2016$sunset_min
+summary(d_sunset_8pm)
+
+# -----> Period : 01 july 2016 to 30 april 2017 ####
+####################################################
+summary(ephem2$date)
+jul2016_apr2017 <- ephem2[ephem2$date <= "2017-04-30" & ephem2$date >= "2016-07-01",]
+summary(jul2016_apr2017$date)
+
+# -----> delay betw 2 AM (120 min) and the sunrise
+d_sunrise_2am <- jul2016_apr2017$sunrise_min - 120
+summary(d_sunrise_2am)
+
+# -----> delay betw 4 AM (240 min) and the sunrise
+d_sunrise_4am <- jul2016_apr2017$sunrise_min - 240
+summary(d_sunrise_4am)
+
 
 # Calculating delay betw 4am and sunrise in minutes ####
 ########################################################
