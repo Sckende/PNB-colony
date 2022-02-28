@@ -107,3 +107,13 @@ summary(d_sunrise_4am)
 delay2 <- ephem2$sunrise_min - 240
 summary(delay2)
 summary(ephem2$sunrise_min)
+
+# -----> Period : from November 2015 & December 2015 ####
+#########################################################
+
+ephem3 <- ephem2[ephem2$date >= "2015-11-01" & ephem2$date <= "2015-12-31",]
+# Delay btw sunrise and 2 AM (120 min) & 3 AM (180 min)
+delay_sunrise <- ephem3$sunrise_min - 120
+mean(delay_sunrise) / 60
+delay_sunrise1 <- ephem3$sunrise_min - 180
+mean(delay_sunrise1) / 60
