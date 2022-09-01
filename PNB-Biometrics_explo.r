@@ -10,6 +10,7 @@ summary(pnb)
 table(pnb$age, pnb$origin)
 pnb$age[pnb$age == 'ad'] <- 'Ad'
 
+
 library(tidyverse)
 library(ggpubr)
 library(rstatix)
